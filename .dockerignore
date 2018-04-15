@@ -1,0 +1,6 @@
+env/
+Dockerfile*
+__pycache__
+Akshi.egg*
+.dockerignore
+.gitignore

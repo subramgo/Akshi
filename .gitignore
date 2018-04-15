@@ -1,0 +1,7 @@
+*.h5
+dist
+build
+Akshi.egg-info
+__pycache__
+.RHistory
+akshi.db

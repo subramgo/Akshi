@@ -1,0 +1,150 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<script>
+$(document).ready(function() {
+    $('#genderlist').DataTable();
+} );
+</script>
+<div class="row-fluid">
+	<div class = "col-md-4">
+	<canvas id="dailyChart" width="50" height="50"></canvas>
+          </div>
+	<div class = "col-md-4">
+	<canvas id="weeklyChart" width="50" height="50"></canvas>
+
+         </div>
+	<div class = "col-md-4">
+		"Something else comes here"
+         </div>
+
+
+</div>
+
+<script>
+var ctx = document.getElementById("dailyChart").getContext('2d');
+
+
+var labels = [{% for ii in summ %}
+                 "{{ ii[0]}}",
+{% endfor %}]
+
+var data = [{% for ii in summ %}
+                 {{ ii[1]}},
+{% endfor %}]
+
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Gender',
+            data: data,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        },
+        title:{
+        	display:true,
+        	text: 'Overall Gender Distribution'
+        }
+    }
+});
+
+
+var wkly_ctx = document.getElementById("weeklyChart").getContext('2d');
+[('14', 'female', 2), ('15', 'female', 6), ('14', 'male', 26), ('15', 'male', 31)]
+
+
+
+var allwks = [{% for ii in weekly %}
+                 "{{ ii[0]}}",
+{% endfor %}]
+
+var wlabels = [];
+wlabels = Array.from(new Set(allwks));
+
+var wmdata = [{% for ii in weekly %}
+		{% if  ii[1]  == 'male' %}
+                 {{ ii[2]}},
+                 {% endif %}
+{% endfor %}]
+
+var wfdata = [{% for ii in weekly %}
+		{% if  ii[1]  == 'female' %}
+                 {{ ii[2]}},
+                 {% endif %}
+{% endfor %}]
+
+
+var myLineChart = new Chart(wkly_ctx, {
+    type: 'line',
+    data: {
+    	labels: wlabels
+       , datasets: [{label:'male',data:wmdata,backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],            borderColor: [
+                'rgba(255,99,132,1)',
+            ],
+            borderWidth: 1}
+            ,{label:'female',data:wfdata,backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+            ],            borderColor: [
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1}]},
+    options: {scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        },
+        title:{display:true, text:"Weekly trend"},
+        showLines:true,
+        animation: {
+            duration: 1, // general animation time
+        },
+        hover: {
+            animationDuration: 1, // duration of animations when hovering an item
+        },
+        responsiveAnimationDuration: 1, // animation duration after a resize
+    }
+});
+
+</script>
+<div class="row-fluid">
+	<div class="col-md-12">
+	<table id="genderlist" class="table table-striped table-bordered" style="width:100%">
+	<thead class="thead-dark">
+	<tr>
+		<th>ID</th>
+		<th>Date</th>
+		<th>Gender</th>
+	</tr>
+</thead>
+<tbody>
+{% for gends in genders %}
+<tr><td> {{ gends.id }}</td> <td>{{ gends.date_created}}</td><td>{{ gends.gender }}</td></tr>
+ {% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+ {% endblock %}}

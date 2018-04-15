@@ -1,0 +1,7 @@
+recursive-include akshi/templates *
+recursive-include akshi/static *
+recursive-include akshi/gender/templates *
+recursive-include akshi/gender/static *
+recursive-include akshi/face/templates *
+recursive-include akshi/face/static *
+recursive-include akshi/config.py

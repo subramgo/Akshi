@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<script>
+
+            var $imageupload = $('.imageupload');
+            $imageupload.imageupload({
+		    allowedFormats: [ 'jpg' ,'png'],
+            });
+</script>
+
+<!-- Panel  -->
+<div class="panel with-nav-tabs panel-sucess">
+    <!-- Panel Header -->	
+    <div class="panel-heading">
+            <ul class="nav nav-tabs">
+                <li   {% if gender %} class="active" {% endif %}>
+                	<a href="#tab1primary" data-toggle="tab">Face Detection</a>
+                </li>
+                <li {% if face %} class="active" {% endif %}><a href="#tab2primary" data-toggle="tab">Face Recognition</a></li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown">Functionalities <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#tab4primary" data-toggle="tab">Repeat Customer</a></li>
+                        <li><a href="#tab5primary" data-toggle="tab">Offender Alert</a></li>
+                    </ul>
+                </li>
+            </ul>
+    </div>
+    <!-- Panel Body -->
+    <div class="panel-body">
+        <div class="tab-content">
+        	            <div {% if gender%} class="tab-pane fade in active " {% else %} class="tab-pane fade" {% endif %}  id="tab1primary">
+			{% include 'face_detection.html' %}
+		   </div>
+		    <div  {% if face%} class="tab-pane fade in active " {% else %} class="tab-pane fade" {% endif %} id="tab2primary"> 
+			{% include 'face_recognition.html' %}
+		    </div>
+	            <div class="tab-pane fade" id="tab3primary">Primary 3</div>
+	            <div class="tab-pane fade" id="tab4primary">Primary 4</div>
+	            <div class="tab-pane fade" id="tab5primary">Primary 5</div>
+
+        </div>    
+      </div>
+</div>
+{% endblock %}

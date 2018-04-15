@@ -1,0 +1,14 @@
+opencv-python==3.3.0.10
+h5py==2.7.1
+Flask_Uploads==0.2.1
+Flask_Bootstrap==3.3.7.1
+WTForms==2.1
+Keras==2.1.1
+tensorflow==1.4.0
+Flask_WTF==0.14.2
+Flask_SQLAlchemy==2.3.2
+SQLAlchemy==1.2.6
+scipy==1.0.0
+numpy==1.13.1
+Flask==0.12.2
+dlib==19.10.0
