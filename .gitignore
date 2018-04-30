@@ -5,3 +5,4 @@ Akshi.egg-info
 __pycache__
 .RHistory
 akshi.db
+*.dat
