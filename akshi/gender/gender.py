@@ -5,6 +5,7 @@ import cv2
 from .Classifier import *
 from .models import Gender, gender_db
 from sqlalchemy import func
+from flask import current_app as app
 
 
 
@@ -57,4 +58,4 @@ def list_genders():
 	output_dict = {}
 	summ = gender_db.session.query(Gender.gender,func.count(Gender.id)).group_by(Gender.gender).all()
 	wkly =gender_db.session.query(func.strftime('%W', Gender.date_created), Gender.gender, func.count(Gender.id)).group_by( Gender.gender,func.strftime('%W', Gender.date_created)).all()
-	return render_template('list_gender.html', title='Gender Dashboard', genders = gends, summ = summ, weekly = wkly)
+	return render_template('list_gender.html', title='Gender Dashboard', genders = gends, summ = summ, weekly = wkly, liveurl = app.config['LIVE_CAMERA'])

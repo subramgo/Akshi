@@ -37,7 +37,35 @@ $(document).ready(function() {
 
          </div>
 	<div class = "col-md-4">
-		"Something else comes here"
+
+			<div class="panel panel-info">
+			  <div class="panel-heading">
+		    		<h3 class="panel-title">Live Stream</h3>
+		    	  </div>
+	  		<div class="panel-body">	
+		<img id = "frame" src="{{ liveurl }}" width="80%" height="80%">
+		<script>        
+		        // Use an off-screen image to load the next frame.
+		        var img = new Image();
+
+		        // When it is loaded...
+		        img.addEventListener("load", function() {
+
+		            // Set the on-screen image to the same source. This should be instant because
+		            // it is already loaded.
+		            document.getElementById("frame").src = img.src;
+
+		            // Schedule loading the next frame.
+		            setTimeout(function() {
+		                img.src = "{{liveurl}}"  + '?'+ (new Date).getTime();
+		            }, 1000/15); // 15 FPS (more or less)
+		        })
+
+		        // Start the loading process.
+		        img.src = "{{liveurl}}" + '?' + (new Date).getTime();
+		    </script>
+		</img>
+	</div></div>
          </div>
 </div>
 

@@ -39,6 +39,7 @@ def match():
     if request.method == 'POST' and 'image-face' in request.files:
         print(request.files)
         files = request.files.getlist("image-face")
+        
         face_recog.uploadpath = app.config['UPLOADED_PHOTOS_DEST']
         face_recog.process(files[0], files[1])
         similarity = face_recog.similarity

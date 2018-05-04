@@ -1,7 +1,6 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-print(basedir)
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'you-will-never-guess'
 
@@ -17,3 +16,4 @@ SQLALCHEMY_DATABASE_URI =  \
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 UPLOADED_PHOTOS_DEST=os.path.join(basedir + '/uploads')
 FACE_RECO_MODEL=os.path.join(basedir + '/akshi/face/bin/facerecog_2.h5')
+LIVE_CAMERA='http://192.168.1.4/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561'

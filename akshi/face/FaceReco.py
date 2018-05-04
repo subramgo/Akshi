@@ -48,9 +48,11 @@ class FaceReco():
     f2_image = cv2.imdecode(f2arr, cv2.IMREAD_COLOR)
 
 
+
     #Preprocess image
     f1_aligned = self.align_dlib.align(crop_dim, f1_image)
     f2_aligned = self.align_dlib.align(crop_dim, f2_image)
+
 
     f1_resized = np.expand_dims(f1_aligned, axis =0)
     f2_resized = np.expand_dims(f2_aligned, axis =0)

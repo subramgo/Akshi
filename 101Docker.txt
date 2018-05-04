@@ -1,0 +1,35 @@
+## Build the base image
+
+docker build -f Dockerfile.base .
+
+## Build the app image
+
+
+
+## Stop a running container
+
+docker stop <CONTAINER ID>
+
+
+## Remove container
+
+docker rm <CONTAINER ID>
+
+## Remove image
+
+docker rmi <IMAGE ID>
+
+## Pulling from a remote repository
+
+docker login
+
+docker pull subramgo/akshi
+
+
+## Running a container
+
+docker run -p 5000:5000 subramgo/akshi
+
+## Terminal login to a running container
+
+docker exec -it <containerIdOrName> bash
