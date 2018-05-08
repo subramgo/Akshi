@@ -18,5 +18,15 @@
 	./run.sh
 
 
+### Docker
+
+build ourselves
+    docker build -t ubuntu-akshi:latest -f Dockerfile.base .
+    docker build -t akshi:latest -f Dockerfile.app .
+    docker run -p 5000:5000 -d akshi:latest
+
+or from prebuilt image...?
+    docker pull subramgo/akshi
+
 
 
