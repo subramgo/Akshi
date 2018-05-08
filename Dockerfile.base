@@ -2,10 +2,19 @@ FROM ubuntu:latest
 MAINTAINER Gopi Subramanian "gopi.subramanian@gmail.com"
 RUN apt-get update -y
 RUN apt-get install -y libgtk2.0-dev
-RUN apt-get install -y python3 python3-pip python3-dev build-essential cmake
+RUN apt-get remove -y python3
+RUN apt-get autoremove -y
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt-get install -y python3.5 python3.5-dev python3-pip build-essential cmake
+RUN rm /usr/bin/python3; ln -s /usr/bin/python3.5 /usr/bin/python3
+RUN apt-mark hold python3
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 COPY . /Akshi
 WORKDIR /Akshi
 RUN pip3 install -r requirements.txt
+RUN pip3 install opencv-python
+RUN apt-get update && apt-get install -y libgtk2.0-dev
+
 
