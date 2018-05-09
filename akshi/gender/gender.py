@@ -54,7 +54,7 @@ def from_cam1():
 
 @gender_api.route('/list', methods=['GET'])
 def list_genders():
-	gends = Gender.query.all()
+	gends = Gender.query.order_by(Gender.date_created.desc()).limit(50).all()
 	output_dict = {}
 	summ = gender_db.session.query(Gender.gender,func.count(Gender.id)).group_by(Gender.gender).all()
 	wkly =gender_db.session.query(func.strftime('%W', Gender.date_created), Gender.gender, func.count(Gender.id)).group_by( Gender.gender,func.strftime('%W', Gender.date_created)).all()
