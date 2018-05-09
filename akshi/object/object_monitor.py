@@ -187,10 +187,9 @@ def main():
     if source == 'picam':
         src = datafeed.stream.PiCam()
     elif source == 'rtsp':
-        src = datafeed.stream.OpenCVStream(datafeed._cafe_uri)
+        src = datafeed.stream.OpenCVStream(datafeed.stream._cafe_uri)
     else:
-        # USB
-        src = datafeed.stream.OpenCVStream(0)
+        src = datafeed.stream.OpenCVStream(0) # USB
 
     for frame in src.frame_generator():
         frame = scipy.misc.toimage(Image.fromarray(frame))
