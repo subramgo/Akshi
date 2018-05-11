@@ -21,14 +21,14 @@ object_detector = Yolo_detector()
 def object():
 	pers = Person.query.order_by(Person.date_created.desc()).limit(50).all()
 
-	return render_template('list_objects.html',  liveurl = app.config['LIVE_CAMERA'],  persons = pers,objecturl = '/api/v1/object/detect')
+	return render_template('list_objects.html',  liveurl = app.config['LIVE_CAMERA'],  persons = pers, objecturl = '/api/v1/object/detect')
 
 
 @object_api.route('/detect', methods=['GET'])
 def detect():
 
 	url = app.config['LIVE_CAMERA'] + str(random.randint(0,1000))
-	response = requests.get(url)
+	response = requests.get(url,auth=("root", "pass"))
 	data = response.content
 	nparr = np.fromstring(data, np.uint8)
 	image_arr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -36,13 +36,16 @@ def detect():
 	image_array = scipy.misc.toimage(Image.fromarray(image_arr))
 	annotated = object_detector.process(image_array)
 
-	per_obj = Person(person_count = object_detector.NoPersons)
-	object_db.session.add(per_obj)
-	object_db.session.commit()
+
 
 
 
 	bIO = BytesIO()
 	annotated.save(bIO, 'PNG')
+
+	per_obj = Person(person_count = object_detector.NoPersons)
+	object_db.session.add(per_obj)
+	object_db.session.commit()
+
 	bIO.seek(0)
 	return send_file(bIO, mimetype='image/png')

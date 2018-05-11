@@ -321,8 +321,10 @@ class Yolo_detector():
 
 if __name__ == "__main__":
     obj = Yolo_detector()
-    url = 'http://192.168.1.4/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561' + str(random.randint(0,1000))
-    response = requests.get(url)
+    #url = 'http://192.168.1.4/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561' + str(random.randint(0,1000))
+    url = 'http://10.38.5.145/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561443' + str(random.randint(0,1000))
+    response = requests.get(url,auth=("root", "pass"))
+    print(response)
     data = response.content
     nparr = np.fromstring(data, np.uint8)
     image_arr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
