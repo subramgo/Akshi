@@ -30,3 +30,5 @@
 ## Terminal login to a running container
 
     docker exec -it <containerIdOrName> bash
+    docker logs <container id>
+

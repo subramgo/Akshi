@@ -9,6 +9,7 @@
 * Download the model files from google drive https://drive.google.com/open?id=1dLg4izlUYVTRkrGyTVv5OJ60awa69zwN
 	* from gender folder in google drive, copy the models to  akshi/gender/bin/
 	* from face folder in google drive, copy the models to      akshi/face/bin
+	* from object folder in google drive, copy the models to akshi/object/bin
 
 * Run setup
 	pip3 install -r requirements.txt
