@@ -8,6 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 #from DLUtils.cellar.yolo import yolokeras
 #from DLUtils.cellar.yolo.yolokeras import yolo_eval, yolo_head
 #from DLUtils import datafeed
+
 import scipy.misc
 import cv2
 """ Implementation of the YOLO network using Keras """
@@ -32,9 +33,11 @@ class_names = [
     "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person",
     "pottedplant", "sheep", "sofa", "train", "tvmonitor"
 ]
+
 # Generate colors for drawing bounding boxes.
 hsv_tuples = [(x / len(class_names), 1., 1.)
               for x in range(len(class_names))]
+
 colors = list(map(lambda x: colorsys.hsv_to_rgb(*x), hsv_tuples))
 colors = list(
     map(lambda x: (int(x[0] * 255), int(x[1] * 255), int(x[2] * 255)),
