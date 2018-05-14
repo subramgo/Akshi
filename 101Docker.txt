@@ -32,3 +32,16 @@
     docker exec -it <containerIdOrName> bash
     docker logs <container id>
 
+## Push to private registry
+
+
+
+    docker login --username username --password password
+
+    docker tag my-image username/my-repo
+
+    docker push username/my-repo
+
+## Remvoe all images
+docker system prune --all
+
