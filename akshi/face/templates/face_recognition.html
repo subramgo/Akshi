@@ -1,50 +1,61 @@
-		<div class="row-fluid">
-			<div class = "col-md-6">
+<!-- Scripts for disabling Submit button after successful file submission -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $(".imageSubmitForm").submit(function () {
+        $(".imageSubmitButton").attr("disabled", true);
+        return true;
+    });
+});
+</script>
 
-				<div class="imageupload panel panel-default">
-			    <div class="panel-heading clearfix">
-			     <h3 class="panel-title pull-left">Upload Face 1 and Face 2</h3>
-			    </div>
-			    <div class="file-tab panel-body"></div>
+<div class="row-fluid">
+	<div class = "col-md-6">
 
-			    <form method=POST enctype=multipart/form-data action="{{ url_for('face.match') }}">
-				    <div class="file-tab panel-body">
-					    <label class="btn btn-default btn-file">
-					            <!--<span>Browse</span>-->
-					            <!-- The file is stored here. -->
-					            <input type="file" name="image-face" multiple>
-				      </label>
-						</div>
-  					<input type="submit">
-				  </form>
+		<div class="imageupload panel panel-default">
+	    <div class="panel-heading clearfix">
+	     <h3 class="panel-title pull-left">Upload Face 1 and Face 2</h3>
+	    </div>
+	    <div class="file-tab panel-body"></div>
+
+	    <form class="imageSubmitForm" method=POST enctype=multipart/form-data action="{{ url_for('face.match') }}">
+		    <div class="file-tab panel-body">
+			    <label class="btn btn-default btn-file">
+			            <!--<span>Browse</span>-->
+			            <!-- The file is stored here. -->
+			            <input type="file" name="image-face" multiple>
+		      </label>
 				</div>
-      </div>
-
-	 		<div class = "col-md-6">
-				<div class="imageupload panel panel-default">
-				           <div class="panel-heading clearfix">
-		        			     	<h3 class="panel-title pull-left">Matching</h3>
-		    			 </div>
-
-		   			 <div class="file-tab panel-body">
-		   			 	{% if filename1 %}
-						  <img src="{{ url_for('face.send_file', filename=filename1) }}">
-						{% else %}
-						  <h3>No Image Selected</h3>
-						{% endif %}
-
-						{% if filename2 %}
-						  <img src="{{ url_for('face.send_file', filename=filename2) }}">
-						{% else %}
-						  <h3>No Image Selected</h3>
-						{% endif %}
-
-						{% if similarity %}
-						<a href="#">Similarity Score <span class="badge">{{similarity}}</span>
-						{% endif %}
-
-
-					  </div>
-	           		</div>
-     			</div>
+				<input type="submit" class="imageSubmitButton">
+		  </form>
 		</div>
+  </div>
+
+		<div class = "col-md-6">
+		<div class="imageupload panel panel-default">
+		           <div class="panel-heading clearfix">
+        			     	<h3 class="panel-title pull-left">Matching</h3>
+    			 </div>
+
+   			 <div class="file-tab panel-body">
+   			 	{% if filename1 %}
+				  <img src="{{ url_for('face.send_file', filename=filename1) }}">
+				{% else %}
+				  <h3>No Image Selected</h3>
+				{% endif %}
+
+				{% if filename2 %}
+				  <img src="{{ url_for('face.send_file', filename=filename2) }}">
+				{% else %}
+				  <h3>No Image Selected</h3>
+				{% endif %}
+
+				{% if similarity %}
+				<a href="#">Similarity Score <span class="badge">{{similarity}}</span>
+				{% endif %}
+
+
+			  </div>
+         		</div>
+ 			</div>
+</div>
