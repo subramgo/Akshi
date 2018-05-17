@@ -1,0 +1,18 @@
+/*!
+ * 
+ * Custom CSS not compiled with/in Bootstrap
+ * 
+ */
+
+.navbar {
+  background-color: #FAB92D !important;
+  position: fixed !important; /* Set the navbar to fixed position */
+  top: 0          !important; /* Position the navbar at the top of the page */
+  width: 100% !important;
+  z-index: 10 !important;
+}
+
+body > div.container-fluid:nth-child(2) {
+  margin-top: 3em !important;
+}
+
