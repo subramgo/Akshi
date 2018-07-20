@@ -15,6 +15,7 @@ SQLALCHEMY_DATABASE_URI =  \
         'sqlite:///' + os.path.join(basedir, 'akshi.db')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 UPLOADED_PHOTOS_DEST=os.path.join(basedir + '/uploads')
+UPLOADED_FACE_DEST=os.path.join(basedir + '/uploads/face')
 FACE_RECO_MODEL=os.path.join(basedir + '/akshi/face/bin/facerecog_2.h5')
-#LIVE_CAMERA='http://192.168.1.4/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561'
-LIVE_CAMERA='http://10.38.5.145/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561443'
+LIVE_CAMERA='http://192.168.1.2/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561'
+#LIVE_CAMERA='http://10.38.5.145/uapi-cgi/viewer/snapshot.fcgi?_=1525375407561443'

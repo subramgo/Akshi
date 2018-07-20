@@ -36,10 +36,22 @@ class FaceReco():
     self.uploadpath = uploadpath
     self.align_dlib = AlignDlib()
 
-  
-  def process(self,file1,file2):
+  def getvector(self, file1, name):
+    face = file1.read()
+    f1arr = np.fromstring(face, np.uint8)
+    f1_image = cv2.imdecode(f1arr, cv2.IMREAD_COLOR)
+    f1_aligned = self.align_dlib.align(crop_dim, f1_image)
+    f1_resized = np.expand_dims(f1_aligned, axis =0)
+    f1_vector = self.model.predict_on_batch(f1_resized)
+
+    cv2.imwrite(os.path.join(self.uploadpath, name), f1_image)
+    return f1_vector
+
+  def process(self,file1,file2,name):
     face1 = file1.read()
     face2 = file2.read()
+
+
 
     f1arr = np.fromstring(face1, np.uint8)
     f2arr  = np.fromstring(face2, np.uint8)

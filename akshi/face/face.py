@@ -2,14 +2,14 @@ from flask import render_template, flash, redirect, Blueprint, request, send_fro
 import json
 import numpy as np 
 import cv2
-from .models import Face, face_db
+from .models import Face, face_db, Name
 from sqlalchemy import func
 import sys
 import dlib
 from flask import current_app as app
 import os
 from .FaceReco import *
-
+import time
 
 face_api = Blueprint('face', __name__, url_prefix='/api/v1/face', template_folder = 'templates', static_folder = 'static')
 face_detector = dlib.get_frontal_face_detector()
@@ -31,6 +31,19 @@ def detect_faces():
     face_db.session.add(face_obj)
     face_db.session.commit()
     return json.dumps({"no_faces":no_faces})
+
+@face_api.route('/save_faces',methods=['GET','POST'])
+def save_faces():
+    data = request.data
+    face_recog.uploadpath = app.config['UPLOADED_FACE_DEST']
+    epoch_time = (int(time.time()))
+
+    face_vector = face_recog.getvector(data, str(epoch_time))
+    name_obj = Name(Name_id = epoch_time, Name_vector = face_vector)
+    face_db.session.add(name_obj)
+    face_db.session.commit()
+
+    return None
 
 
 

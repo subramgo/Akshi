@@ -6,7 +6,7 @@ from .Classifier import *
 from .models import Gender, gender_db
 from sqlalchemy import func
 from flask import current_app as app
-
+import requests
 
 
 predictor = GenderClassifier()
@@ -45,6 +45,10 @@ def from_cam1():
     gender_db.session.add(gen_obj)
     gender_db.session.commit()
 
+    # Call the face_saving api
+    #_, img_encoded = cv2.imencode('.jpg', img_arr)
+    url = url_for('api.task', _external=True)
+    response = requests.post('/api/v1/face/save_faces/', data=img_file, headers={'content-type': 'image/jpeg'})
 
     return json.dumps({'gender': pred_val})
 
