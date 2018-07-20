@@ -1,4 +1,5 @@
 *.h5
+.DS_Store
 dist
 build
 Akshi.egg-info
