@@ -1,0 +1,7 @@
+<h1> hello world ! </h1>
+
+<tbody>
+{% for sign in signs %}
+<tr><td> {{ sign.id }}</td> <td>{{ sign.date_created}}</td><td>{{ sign.camera_id }}</td><td>{{ sign.no_faces }}</td></tr>
+ {% endfor %}
+</tbody>
