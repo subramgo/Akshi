@@ -26,6 +26,7 @@
 ## Running a container
 
     docker run -p 5000:5000 subramgo/akshi
+    docker run -d -p 5000:5000 akshi:latest --name akshi_signage --restart always
 
 ## Terminal login to a running container
 
