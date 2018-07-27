@@ -11,6 +11,7 @@ class FaceSignage(signage_db.Model):
     no_faces = signage_db.Column(signage_db.Integer)
     windows = signage_db.Column(signage_db.String)
     image_id = signage_db.Column(signage_db.String)
+    location   = signage_db.Column(signage_db.String)
 
 
 
@@ -24,13 +25,14 @@ class FaceSignage(signage_db.Model):
     	return_value['no_faces'] = self.no_faces
     	return_value['windows'] = self.windows
     	return_value['image_id'] = self.image_id
+    	return_value['location'] = self.location
 
     	return return_value
 
 
 
     def __repr__(self):
-        return '<id {} date_created {} camera_id {} no_faces {} windows {} image_id {}>'.format(self.id, 
-        	self.date_created, self.camera_id, self.no_faces, self.windows, self.image_id)
+        return '<id {} date_created {} camera_id {} no_faces {} windows {} image_id {} location {}>'.format(self.id, 
+        	self.date_created, self.camera_id, self.no_faces, self.windows, self.image_id,self.location)
 
     

@@ -26,7 +26,8 @@ def signage_page():
 @signage_api.route('/signage_upload', methods=['POST'])
 def signage_upload():
     payload = request.json
-    signage_obj = FaceSignage(image_id = "epoch_time", no_faces = payload['no_faces'], windows = payload['windows'], camera_id = payload['camera_id'])
+    signage_obj = FaceSignage(image_id = "image_id", no_faces = payload['no_faces'], windows = payload['windows'], 
+        camera_id = payload['camera_id'], location=payload['location'])
     signage_db.session.add(signage_obj)
     signage_db.session.commit()
     return  Response(response={'status': 'SUCCESS'}, status=200, mimetype="application/json")
