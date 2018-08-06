@@ -3,6 +3,8 @@ import json
 import numpy as np 
 import cv2
 from .models import  signage_db,FaceSignage
+from .ObjectTracking import track_objects
+
 from sqlalchemy import func
 import sys
 import dlib
@@ -22,6 +24,15 @@ def signage_page():
     signs_json = json.dumps([sign.get_json() for sign in signs])
     return Response(signs_json, mimetype="application/json")
  
+
+@signage_api.route('/object_track',methods=['GET'])
+def object_track():
+    signs = FaceSignage.query.order_by(FaceSignage.date_created.desc()).all()
+    signs_json = [sign.get_json() for sign in signs]
+    object_log = track_objects(signs_json)
+    return Response(json.dumps(object_log), mimetype="application/json")
+
+
 
 @signage_api.route('/signage_upload', methods=['POST'])
 def signage_upload():
